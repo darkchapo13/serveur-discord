@@ -46,6 +46,50 @@
       box-sizing: border-box;
     }
 
+    /* Profil rond avec gif */
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 15px auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    }
+    .profile-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Nom + badge certifié */
+    .name-certified {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 5px;
+      font-weight: 600;
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+      animation: fadeInDown 1s ease forwards;
+    }
+    .certified-badge svg {
+      width: 28px;
+      height: 28px;
+      fill: #1DA1F2; /* Bleu Twitter */
+      filter: drop-shadow(0 0 3px #1DA1F2);
+    }
+
+    .certified-text {
+      font-weight: 500;
+      font-size: 1rem;
+      color: #1DA1F2;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+      animation: fadeInUp 1.2s ease forwards;
+      margin-bottom: 30px;
+    }
+
     h1 {
       font-weight: 600;
       font-size: 3rem;
@@ -164,73 +208,38 @@
         display: block;
         width: 80%;
       }
+      .name-certified {
+        font-size: 1.8rem;
+      }
+      .certified-badge svg {
+        width: 20px;
+        height: 20px;
+      }
+      .certified-text {
+        font-size: 0.85rem;
+      }
     }
-
-
-    /* ==== Ajout profil GIF rond + badge icône ==== */
-
-    .profile-container {
-      position: relative;
-      z-index: 2; /* au-dessus du contenu */
-      margin-bottom: 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .profile-pic {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 4px solid #5865f2;
-      box-shadow: 0 0 15px #5865f2;
-      margin-bottom: 15px;
-    }
-
-    .profile-pic img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .username {
-      font-size: 2rem;
-      font-weight: 600;
-      margin: 0;
-      letter-spacing: 1px;
-      text-shadow: 0 0 8px #5865f2;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      justify-content: center;
-    }
-
-    .verified-icon {
-      width: 24px;
-      height: 24px;
-      filter: drop-shadow(0 0 3px #5865f2);
-    }
-
   </style>
 </head>
 <body>
-  <!-- Profil avec GIF rond + icône de certification -->
-  <div class="profile-container" aria-label="Profil de Dark certifié">
-    <div class="profile-pic">
-      <img src="https://i.pinimg.com/originals/a8/ab/95/a8ab953a947847b50c2f525c98345a0d.gif" alt="Photo de profil animée de Dark" />
-    </div>
-    <h1 class="username">
-      Dark
-      <img class="verified-icon" src="https://cdn-icons-png.flaticon.com/512/709/709699.png" alt="Badge de certification bleu" title="Certifié" />
-    </h1>
-  </div>
-
   <div class="content">
-    <a href="https://discord.gg/QFSPavF8" target="_blank" class="discord-logo-link" aria-label="Lien vers serveur Discord">
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Logo Discord" />
-    </a>
+
+    <!-- Image gif profil ronde -->
+    <div class="profile-pic">
+      <img src="https://i.pinimg.com/originals/a8/ab/95/a8ab953a947847b50c2f525c98345a0d.gif" alt="Photo de profil de Dark" />
+    </div>
+
+    <!-- Nom Dark + badge certifié -->
+    <div class="name-certified" aria-label="Nom et badge certifié de Dark">
+      Dark
+      <span class="certified-badge" aria-label="Compte certifié">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#1DA1F2" d="M9.5 16.5L5 12l1.4-1.4 3.1 3.1 6.5-6.5L16.5 8l-7 7z"/>
+        </svg>
+      </span>
+    </div>
+
+    <div class="certified-text">Compte certifié</div>
 
     <h1>Rejoins le serveur de Dark !</h1>
     <p>Un lieu de fun, d'entraide et de gaming. Tu es le bienvenu ! 🎮💬</p>
@@ -260,3 +269,4 @@
     });
   </script>
 </body>
+</html>

@@ -3,13 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>Serveur Discord de Dark</title>
-  
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  
-  <!-- Favicon -->
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" />
-  
   <style>
     /* Reset & base */
     body, html {
@@ -20,12 +15,7 @@
       background: url('https://i.pinimg.com/originals/f7/9e/9e/f79e9ed494ed804c08832a797c5de5fa.gif') no-repeat center center fixed;
       background-size: cover;
       overflow-x: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      flex-direction: column;
+      transition: background-color 0.5s, color 0.5s;
     }
 
     /* Overlay dégradé pour lisibilité */
@@ -35,15 +25,52 @@
       top: 0; left: 0; right: 0; bottom: 0;
       background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.7) 100%);
       z-index: 0;
+      transition: background 0.5s;
     }
 
-    /* Contenu au-dessus */
-    .content {
+    /* Thème sombre / clair */
+    body.light {
+      color: #222;
+      background: url('https://i.pinimg.com/originals/f7/9e/9e/f79e9ed494ed804c08832a797c5de5fa.gif') no-repeat center center fixed;
+      background-size: cover;
+    }
+    body.light::before {
+      background: linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.5) 60%, rgba(255,255,255,0.8) 100%);
+    }
+    body.light a.btn-discord {
+      background-color: #5865f2;
+      color: white;
+    }
+    body.light #copyBtn {
+      background-color: #7289da;
+      color: white;
+    }
+
+    /* Conteneur principal */
+    .container {
       position: relative;
       z-index: 1;
-      max-width: 600px;
-      padding: 20px;
-      box-sizing: border-box;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    /* Logo Discord */
+    .discord-logo-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 5px #5865f2);
+      transition: transform 0.3s, filter 0.3s;
+      cursor: pointer;
+    }
+    .discord-logo-link:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 12px #4752c4);
+    }
+    .discord-logo-link img {
+      width: 70px;
+      height: 70px;
     }
 
     h1 {
@@ -51,78 +78,41 @@
       font-size: 3rem;
       margin-bottom: 15px;
       text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-      animation: fadeInDown 1s ease forwards;
     }
 
-    p {
+    p.lead {
       font-weight: 400;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       margin-bottom: 30px;
       text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
-      animation: fadeInUp 1.2s ease forwards;
     }
 
-    .btn-discord {
-      background-color: #5865f2;
-      color: white;
-      padding: 15px 35px;
+    /* Boutons */
+    .btn-discord, #copyBtn {
+      padding: 15px 40px;
       font-size: 1.2rem;
       border: none;
       border-radius: 12px;
       cursor: pointer;
-      text-decoration: none;
       box-shadow: 0 5px 15px rgba(88, 101, 242, 0.5);
       transition: background-color 0.3s, transform 0.3s;
+      margin: 10px 10px 30px 10px;
       display: inline-block;
-      animation: fadeIn 1.5s ease forwards;
+      text-decoration: none;
+      color: white;
+      user-select: none;
     }
-
+    .btn-discord {
+      background-color: #5865f2;
+    }
     .btn-discord:hover {
       background-color: #4752c4;
       transform: scale(1.05);
       box-shadow: 0 7px 20px rgba(71, 82, 196, 0.7);
     }
-
-    /* Logo Discord */
-    .discord-logo-link {
-      display: inline-block;
-      margin-bottom: 20px;
-      animation: fadeIn 1s ease forwards;
-      z-index: 1;
-    }
-    .discord-logo-link img {
-      width: 60px;
-      filter: drop-shadow(0 0 3px #5865f2);
-      transition: transform 0.3s, filter 0.3s;
-    }
-    .discord-logo-link img:hover {
-      transform: scale(1.1);
-      filter: drop-shadow(0 0 6px #4752c4);
-    }
-
-    footer {
-      margin-top: 40px;
-      font-size: 0.9rem;
-      color: #dcdcdc;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-      animation: fadeIn 1.8s ease forwards;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Copier le lien bouton */
     #copyBtn {
       background-color: #7289da;
-      margin-left: 15px;
-      padding: 15px 30px;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      color: white;
       box-shadow: 0 5px 15px rgba(114, 137, 218, 0.5);
-      transition: background-color 0.3s, transform 0.3s;
-      animation: fadeIn 1.6s ease forwards;
     }
     #copyBtn:hover {
       background-color: #5b6eae;
@@ -130,75 +120,180 @@
       box-shadow: 0 7px 20px rgba(91, 110, 174, 0.7);
     }
 
-    /* Animations */
-    @keyframes fadeInDown {
-      0% {opacity: 0; transform: translateY(-20px);}
-      100% {opacity: 1; transform: translateY(0);}
+    /* Sections */
+    section {
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
     }
 
-    @keyframes fadeInUp {
-      0% {opacity: 0; transform: translateY(20px);}
-      100% {opacity: 1; transform: translateY(0);}
+    section h2 {
+      margin-bottom: 15px;
+      font-size: 2rem;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
     }
 
-    @keyframes fadeIn {
-      0% {opacity: 0;}
-      100% {opacity: 1;}
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      font-size: 1.1rem;
+    }
+    ul li {
+      margin-bottom: 10px;
+      padding-left: 25px;
+      position: relative;
+      text-align: left;
+    }
+    ul li::before {
+      content: "✔️";
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    /* Footer */
+    footer {
+      font-size: 0.9rem;
+      color: #dcdcdc;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+      margin-top: 20px;
+    }
+
+    /* Réseaux sociaux */
+    .social-links a {
+      margin: 0 12px;
+      display: inline-block;
+      filter: drop-shadow(0 0 2px #5865f2);
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    .social-links a:hover {
+      transform: scale(1.2);
+    }
+    .social-links img {
+      width: 32px;
+      height: 32px;
+    }
+
+    /* Toggle thème */
+    #themeToggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background-color: rgba(0,0,0,0.5);
+      border: none;
+      border-radius: 20px;
+      color: white;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 0 8px rgba(88, 101, 242, 0.7);
+      user-select: none;
+      transition: background-color 0.3s, color 0.3s;
+      z-index: 10;
+    }
+    #themeToggle:hover {
+      background-color: rgba(0,0,0,0.7);
+    }
+    body.light #themeToggle {
+      background-color: rgba(255,255,255,0.7);
+      color: #222;
+      box-shadow: 0 0 8px rgba(114, 137, 218, 0.7);
+    }
+    body.light #themeToggle:hover {
+      background-color: rgba(255,255,255,0.9);
+    }
+
+    /* Discord Widget container */
+    #discordWidget {
+      margin: 0 auto;
+      max-width: 350px;
+      height: 500px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
     }
 
     /* Responsive */
     @media (max-width: 480px) {
       h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
-
-      p {
-        font-size: 1rem;
+      section h2 {
+        font-size: 1.5rem;
       }
-
       .btn-discord, #copyBtn {
         font-size: 1rem;
         padding: 12px 25px;
-        margin-left: 0;
-        margin-top: 10px;
+        margin: 10px auto 30px auto;
         display: block;
         width: 80%;
+      }
+      #discordWidget {
+        max-width: 100%;
+        height: 400px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="content">
+  <button id="themeToggle" aria-label="Basculer thème clair/sombre">🌙</button>
+  <div class="container">
     <a href="https://discord.gg/QFSPavF8" target="_blank" class="discord-logo-link" aria-label="Lien vers serveur Discord">
       <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Logo Discord" />
     </a>
 
     <h1>Rejoins le serveur de Dark !</h1>
-    <p>Un lieu de fun, d'entraide et de gaming. Tu es le bienvenu ! 🎮💬</p>
+    <p class="lead">Un lieu de fun, d'entraide et de gaming. Tu es le bienvenu ! 🎮💬</p>
     
-    <a href="https://discord.gg/QFSPavF8" target="_blank" class="btn-discord" aria-label="Rejoindre le serveur Discord">
+    <a href="https://discord.gg/QFSPavF8" target="_blank" class="btn-discord" id="joinBtn" aria-label="Rejoindre le serveur Discord">
       ➡️ Rejoindre le serveur
     </a>
     
     <button id="copyBtn" aria-label="Copier le lien du serveur Discord">📋 Copier le lien</button>
-    
+
+    <section>
+      <h2>Pourquoi nous rejoindre ?</h2>
+      <ul>
+        <li>🎮 Communauté active 24/7</li>
+        <li>💬 Discussions sympas et entraide</li>
+        <li>🏆 Événements gaming réguliers</li>
+        <li>🤖 Bots utiles et fun</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Règles rapides</h2>
+      <ul>
+        <li>Respect et bienveillance obligatoires</li>
+        <li>Pas de spam ni flood</li>
+        <li>Pas de contenu inapproprié</li>
+        <li>Amuse-toi !</li>
+      </ul>
+    </section>
+
+    <section id="discordWidget">
+      <!-- Remplace TON_ID_SERVEUR par l'ID de ton serveur Discord -->
+      <iframe src="https://discord.com/widget?id=TON_ID_SERVEUR&theme=dark" width="100%" height="100%" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+    </section>
+
     <footer>
+      <div class="social-links" aria-label="Réseaux sociaux">
+        <!-- Modifie / ajoute tes liens ici -->
+        <a href="https://twitter.com/" target="_blank" rel="noopener" aria-label="Twitter">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" />
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" />
+        </a>
+        <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">
+          <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" />
+        </a>
+      </div>
       <p>&copy; 2025 Dark | Site créé pour promouvoir mon serveur Discord</p>
     </footer>
   </div>
 
-  <script>
-    const copyBtn = document.getElementById('copyBtn');
-    copyBtn.addEventListener('click', () => {
-      navigator.clipboard.writeText('https://discord.gg/QFSPavF8')
-        .then(() => {
-          copyBtn.textContent = '✅ Lien copié !';
-          setTimeout(() => copyBtn.textContent = '📋 Copier le lien', 2000);
-        })
-        .catch(() => {
-          alert('Erreur lors de la copie du lien.');
-        });
-    });
-  </script>
-</body>
-</html>
+  <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-09.mp3"

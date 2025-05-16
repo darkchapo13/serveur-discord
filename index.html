@@ -167,7 +167,7 @@
     }
 
 
-    /* ==== Ajout profil GIF rond + badge ==== */
+    /* ==== Ajout profil GIF rond + badge icône ==== */
 
     .profile-container {
       position: relative;
@@ -201,32 +201,30 @@
       margin: 0;
       letter-spacing: 1px;
       text-shadow: 0 0 8px #5865f2;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
     }
 
-    .badge {
-      margin-top: 5px;
-      display: inline-block;
-      background-color: #43b581;
-      color: white;
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 3px 12px;
-      border-radius: 20px;
-      box-shadow: 0 0 8px #43b581;
-      letter-spacing: 0.5px;
-      user-select: none;
+    .verified-icon {
+      width: 24px;
+      height: 24px;
+      filter: drop-shadow(0 0 3px #5865f2);
     }
 
   </style>
 </head>
 <body>
-  <!-- Profil avec GIF rond + badge -->
+  <!-- Profil avec GIF rond + icône de certification -->
   <div class="profile-container" aria-label="Profil de Dark certifié">
     <div class="profile-pic">
       <img src="https://i.pinimg.com/originals/a8/ab/95/a8ab953a947847b50c2f525c98345a0d.gif" alt="Photo de profil animée de Dark" />
     </div>
-    <h1 class="username">Dark</h1>
-    <div class="badge">Certifié</div>
+    <h1 class="username">
+      Dark
+      <img class="verified-icon" src="https://cdn-icons-png.flaticon.com/512/709/709699.png" alt="Badge de certification bleu" title="Certifié" />
+    </h1>
   </div>
 
   <div class="content">
@@ -262,4 +260,3 @@
     });
   </script>
 </body>
-</html>

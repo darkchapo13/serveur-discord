@@ -3,22 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <title>Serveur Discord de Dark</title>
-
+  
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-
+  
   <!-- Favicon -->
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" />
-
+  
   <style>
     /* Reset & base */
     body, html {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       height: 100%;
       font-family: 'Poppins', sans-serif;
       color: white;
-      background: url('https://i.pinimg.com/originals/ab/4a/86/ab4a8687ff7b3e9ec354dfc2cdaa8d8b.gif') no-repeat center center fixed;
+      background: url('https://i.pinimg.com/originals/f7/9e/9e/f79e9ed494ed804c08832a797c5de5fa.gif') no-repeat center center fixed;
       background-size: cover;
       overflow-x: hidden;
       display: flex;
@@ -29,6 +28,7 @@
       flex-direction: column;
     }
 
+    /* Overlay dégradé pour lisibilité */
     body::before {
       content: "";
       position: fixed;
@@ -37,6 +37,7 @@
       z-index: 0;
     }
 
+    /* Contenu au-dessus */
     .content {
       position: relative;
       z-index: 1;
@@ -45,6 +46,7 @@
       box-sizing: border-box;
     }
 
+    /* Profil rond avec gif */
     .profile-pic {
       width: 120px;
       height: 120px;
@@ -53,7 +55,6 @@
       margin: 0 auto 15px auto;
       box-shadow: 0 0 15px rgba(0,0,0,0.6);
     }
-
     .profile-pic img {
       width: 100%;
       height: 100%;
@@ -61,6 +62,7 @@
       display: block;
     }
 
+    /* Nom + badge certifié */
     .name-certified {
       display: inline-flex;
       align-items: center;
@@ -72,11 +74,10 @@
       text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
       animation: fadeInDown 1s ease forwards;
     }
-
     .certified-badge svg {
       width: 28px;
       height: 28px;
-      fill: #1DA1F2;
+      fill: #1DA1F2; /* Bleu Twitter */
       filter: drop-shadow(0 0 3px #1DA1F2);
     }
 
@@ -126,6 +127,34 @@
       box-shadow: 0 7px 20px rgba(71, 82, 196, 0.7);
     }
 
+    /* Logo Discord */
+    .discord-logo-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease forwards;
+      z-index: 1;
+    }
+    .discord-logo-link img {
+      width: 60px;
+      filter: drop-shadow(0 0 3px #5865f2);
+      transition: transform 0.3s, filter 0.3s;
+    }
+    .discord-logo-link img:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 6px #4752c4);
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #dcdcdc;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+      animation: fadeIn 1.8s ease forwards;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Copier le lien bouton */
     #copyBtn {
       background-color: #7289da;
       margin-left: 15px;
@@ -139,23 +168,13 @@
       transition: background-color 0.3s, transform 0.3s;
       animation: fadeIn 1.6s ease forwards;
     }
-
     #copyBtn:hover {
       background-color: #5b6eae;
       transform: scale(1.05);
       box-shadow: 0 7px 20px rgba(91, 110, 174, 0.7);
     }
 
-    footer {
-      margin-top: 40px;
-      font-size: 0.9rem;
-      color: #dcdcdc;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-      animation: fadeIn 1.8s ease forwards;
-      position: relative;
-      z-index: 1;
-    }
-
+    /* Animations */
     @keyframes fadeInDown {
       0% {opacity: 0; transform: translateY(-20px);}
       100% {opacity: 1; transform: translateY(0);}
@@ -171,9 +190,16 @@
       100% {opacity: 1;}
     }
 
+    /* Responsive */
     @media (max-width: 480px) {
-      h1 { font-size: 2rem; }
-      p { font-size: 1rem; }
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
       .btn-discord, #copyBtn {
         font-size: 1rem;
         padding: 12px 25px;
@@ -182,18 +208,28 @@
         display: block;
         width: 80%;
       }
-      .name-certified { font-size: 1.8rem; }
-      .certified-badge svg { width: 20px; height: 20px; }
-      .certified-text { font-size: 0.85rem; }
+      .name-certified {
+        font-size: 1.8rem;
+      }
+      .certified-badge svg {
+        width: 20px;
+        height: 20px;
+      }
+      .certified-text {
+        font-size: 0.85rem;
+      }
     }
   </style>
 </head>
 <body>
   <div class="content">
+
+    <!-- Image gif profil ronde -->
     <div class="profile-pic">
       <img src="https://i.pinimg.com/originals/a8/ab/95/a8ab953a947847b50c2f525c98345a0d.gif" alt="Photo de profil de Dark" />
     </div>
 
+    <!-- Nom Dark + badge certifié -->
     <div class="name-certified" aria-label="Nom et badge certifié de Dark">
       Dark
       <span class="certified-badge" aria-label="Compte certifié">
@@ -207,13 +243,13 @@
 
     <h1>Rejoins le serveur de Dark !</h1>
     <p>Un lieu de fun, d'entraide et de gaming. Tu es le bienvenu ! 🎮💬</p>
-
+    
     <a href="https://discord.gg/QFSPavF8" target="_blank" class="btn-discord" aria-label="Rejoindre le serveur Discord">
       ➡️ Rejoindre le serveur
     </a>
-
+    
     <button id="copyBtn" aria-label="Copier le lien du serveur Discord">📋 Copier le lien</button>
-
+    
     <footer>
       <p>&copy; 2025 Dark | Site créé pour promouvoir mon serveur Discord</p>
     </footer>
